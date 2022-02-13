@@ -81,6 +81,10 @@
     <FlyoutItem Title="Welcome">
         <ShellContent Route="Welcome Page" ContentTemplate="{DataTemplate views:WelcomePage}"></ShellContent>
     </FlyoutItem>
+    
+    <FlyoutItem Title="Jobs">
+        <ShellContent Route="JobListPage" ContentTemplate="{DataTemplate views:JobListPage}"></ShellContent>
+    </FlyoutItem>
                 
 
     <!--
