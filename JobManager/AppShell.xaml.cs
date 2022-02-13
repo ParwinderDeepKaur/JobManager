@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JobManager.Views;
 using Xamarin.Forms;
 
 namespace JobManager
@@ -8,7 +9,8 @@ namespace JobManager
     {
         public AppShell()
         {
-            InitializeComponent();  
+            InitializeComponent();
+            Routing.RegisterRoute(nameof(WelcomePage), typeof(WelcomePage));
         }
     }
 }

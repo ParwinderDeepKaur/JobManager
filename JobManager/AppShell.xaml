@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:JobManager.Views"
        Title="JobManager"
        x:Class="JobManager.AppShell">
 
@@ -77,7 +78,10 @@
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
-    
+    <FlyoutItem Title="Welcome">
+        <ShellContent Route="Welcome Page" ContentTemplate="{DataTemplate views:WelcomePage}"></ShellContent>
+    </FlyoutItem>
+                
 
     <!--
         TabBar lets you define content that won't show up in a flyout menu. When this content is active
