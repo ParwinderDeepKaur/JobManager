@@ -21,17 +21,23 @@ namespace JobManager.Services
 
         public async Task AddJob(Job job)
         {
-            throw new NotImplementedException();
+            var jobs = ReadFile();
+            jobs.Add(job);
+            WriteFile(jobs);
         }
 
         public async Task DeleteJob(Job job)
         {
-            throw new NotImplementedException();
+            var jobs = ReadFile();
+            var remove = jobs.Find(p => p.Id == job.Id);
+            jobs.Remove(remove);
         }
 
         public async Task<Job> GetJob(int id)
         {
-            throw new NotImplementedException();
+            var jobs = ReadFile();
+            var job = jobs.Find(p => p.Id == id);
+            return job;
         }
 
         public async Task<IEnumerable<Job>> GetJobs()
@@ -42,7 +48,9 @@ namespace JobManager.Services
 
         public async Task UpdateJob(Job job)
         {
-            throw new NotImplementedException();
+            var jobs = ReadFile();
+            jobs[jobs.FindIndex(p => p.Id == job.Id)] = job;
+            WriteFile(jobs);
         }
 
         private void WriteFile(List<Job> jobs)
@@ -76,6 +84,7 @@ namespace JobManager.Services
                 new Job{Id = 1, Name = "job D local json file", Description = "this is a job D." }
             };
             return jobs;
+             
         }
     }
 }
