@@ -79,9 +79,9 @@ namespace JobManager.Services
         {
             var jobs = new List<Job>(){
                 new Job{Id = 1, Name = "job A local json file", Description = "this is a job A." },
-                new Job{Id = 1, Name = "job B local json file", Description = "this is a job B." },
-                new Job{Id = 1, Name = "job C local json file", Description = "this is a job C." },
-                new Job{Id = 1, Name = "job D local json file", Description = "this is a job D." }
+                new Job{Id = 2, Name = "job B local json file", Description = "this is a job B." },
+                new Job{Id = 3, Name = "job C local json file", Description = "this is a job C." },
+                new Job{Id = 4, Name = "job D local json file", Description = "this is a job D." }
             };
             return jobs;
              

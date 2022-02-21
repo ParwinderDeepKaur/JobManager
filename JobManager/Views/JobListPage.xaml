@@ -3,12 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:JobManager.ViewModels"
              xmlns:models="clr-namespace:JobManager.Models"
-             xmlns:xct="http://xamarin.com.schemas/2020/toolkit"
+             xmlns:xct="http://xamarin.com.schemas/2020/toolkit" xmlns:xct1="http://xamarin.com/schemas/2020/toolkit"
              x:Class="JobManager.Views.JobListPage">
 
     <ContentPage.BindingContext>
         <viewmodels:JobListViewModel />
     </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct1:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"></xct1:ItemSelectedEventArgsConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
         <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy}">
@@ -19,6 +25,13 @@
                     CachingStrategy="RecycleElement"
                     ItemsSource="{Binding Jobs}"
                     RowHeight="60">
+                        <ListView.Behaviors>
+                            <xct1:EventToCommandBehavior
+                                EventName="ItemSelected"
+                                Command="{Binding SelectCommand}"
+                                EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}">
+                            </xct1:EventToCommandBehavior>
+                        </ListView.Behaviors>
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="models:Job">
                                 <ViewCell>
