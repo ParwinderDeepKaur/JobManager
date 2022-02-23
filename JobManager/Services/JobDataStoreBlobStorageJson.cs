@@ -12,7 +12,7 @@ namespace JobManager.Services
     class JobDataStoreBlobStorageJson : IJobDataStore<Job>
     {
         private readonly BlobServiceClient service = new BlobServiceClient(ConnectionString); 
-        private static string ConnectionString => "connectionstringhere";
+        private static string ConnectionString => "DefaultEndpointsProtocol=https;AccountName=isp1004students1;AccountKey=C0U36cHkZoANkoeVjDYQRVjcEZwET+SEIufFAKdFRh9MKTDvlVvbulWTkLqD/zHKjQISqNBBYkW1+ASt2xmhLQ==;EndpointSuffix=core.windows.net";
         private static string Container => "data";
         private static string FileName => "Jobs.json";
 
@@ -65,7 +65,9 @@ namespace JobManager.Services
 
         public async Task AddJob(Job job)
         {
-            throw new NotImplementedException();
+            var jobs = await ReadFile();
+            jobs.Add(job);
+            await WriteFile(jobs);
         }
 
         public async Task DeleteJob(Job job)
@@ -75,7 +77,9 @@ namespace JobManager.Services
 
         public async Task<Job> GetJob(int id)
         {
-            throw new NotImplementedException();
+            var jobs = await ReadFile();
+            var job = jobs.Find(p => p.Id == id);
+            return job;
         }
 
         public async Task<IEnumerable<Job>> GetJobs()
@@ -86,7 +90,9 @@ namespace JobManager.Services
 
         public async Task UpdateJob(Job job)
         {
-            throw new NotImplementedException();
+            var jobs = await ReadFile();
+            jobs[jobs.FindIndex(p => p.Id == job.Id)] = job;
+            await WriteFile (jobs);
         }
     }
 }
