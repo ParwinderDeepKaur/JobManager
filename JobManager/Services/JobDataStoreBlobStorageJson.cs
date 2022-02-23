@@ -19,7 +19,14 @@ namespace JobManager.Services
 
         public async Task WriteFile(List<Job> jobs)
         {
-            throw new NotImplementedException();
+            var jsonString = JsonConvert.SerializeObject(jobs);
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(jsonString);
+            writer.Flush();
+            stream.Position = 0;
+            BlobClient blob = service.GetBlobContainerClient(Container).GetBlobClient(FileName);
+            await blob.UploadAsync(stream);
         }
 
         public async Task<List<Job>> ReadFile()
@@ -44,13 +51,13 @@ namespace JobManager.Services
             }
         }
 
-        private List<Job> GetDefaultJobs()
+        private List<Job> GetDefaultJobs() 
         {
             var jobs = new List<Job>(){
-                new Job{Id = 1, Name = "job A local json file", Description = "this is a job A." },
-                new Job{Id = 2, Name = "job B local json file", Description = "this is a job B." },
-                new Job{Id = 3, Name = "job C local json file", Description = "this is a job C." },
-                new Job{Id = 4, Name = "job D local json file", Description = "this is a job D." }
+                new Job{Id = 1, Name = "job A Azure Blob file", Description = "this is a job A." },
+                new Job{Id = 2, Name = "job B Azure Blob file", Description = "this is a job B." },
+                new Job{Id = 3, Name = "job C Azure Blob file", Description = "this is a job C." },
+                new Job{Id = 4, Name = "job D Azure Blob file", Description = "this is a job D." }
             };
             return jobs;
 
@@ -73,7 +80,8 @@ namespace JobManager.Services
 
         public async Task<IEnumerable<Job>> GetJobs()
         {
-            throw new NotImplementedException();
+            var jobs = await ReadFile();
+            return jobs;
         }
 
         public async Task UpdateJob(Job job)

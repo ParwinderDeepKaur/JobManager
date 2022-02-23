@@ -19,18 +19,17 @@ namespace JobManager.Services
             }
         }
 
-        public async Task AddJob(Job job)
-        {
-            var jobs = ReadFile();
-            jobs.Add(job);
-            WriteFile(jobs);
-        }
-
         public async Task DeleteJob(Job job)
         {
             var jobs = ReadFile();
             var remove = jobs.Find(p => p.Id == job.Id);
             jobs.Remove(remove);
+        }
+
+        private void WriteFile(List<Job> jobs)
+        {
+            var jsonString = JsonConvert.SerializeObject(jobs);
+            File.WriteAllText(FilePath, jsonString);
         }
 
         public async Task<Job> GetJob(int id)
@@ -53,10 +52,11 @@ namespace JobManager.Services
             WriteFile(jobs);
         }
 
-        private void WriteFile(List<Job> jobs)
+        public async Task AddJob(Job job)
         {
-            var jsonString = JsonConvert.SerializeObject(jobs);
-            File.WriteAllText(FilePath, jsonString);
+            var jobs = ReadFile();
+            jobs.Add(job);
+            WriteFile(jobs);
         }
 
         private List<Job> ReadFile()
