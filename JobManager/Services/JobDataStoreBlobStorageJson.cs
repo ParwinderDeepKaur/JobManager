@@ -12,7 +12,7 @@ namespace JobManager.Services
     class JobDataStoreBlobStorageJson : IJobDataStore<Job>
     {
         private readonly BlobServiceClient service = new BlobServiceClient(ConnectionString); 
-        private static string ConnectionString => "DefaultEndpointsProtocol=https;AccountName=isp1004students1;AccountKey=C0U36cHkZoANkoeVjDYQRVjcEZwET+SEIufFAKdFRh9MKTDvlVvbulWTkLqD/zHKjQISqNBBYkW1+ASt2xmhLQ==;EndpointSuffix=core.windows.net";
+        private static string ConnectionString => "connectionstring"; // connection string is hidden because it was mentioned in task to hide it for security purpose
         private static string Container => "data";
         private static string FileName => "Jobs.json";
 
