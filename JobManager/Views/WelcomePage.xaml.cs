@@ -12,11 +12,5 @@ namespace JobManager.Views
         {
             InitializeComponent();
         }
-
-        private async void OnAccessAPIClicked(object sender, EventArgs e)
-        {
-            var service = DependencyService.Get<IWebClientService>();
-            var content = await service.GetString("https://www.google.com");
-        }
     }
 }
