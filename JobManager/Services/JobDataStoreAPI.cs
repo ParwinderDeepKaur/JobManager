@@ -16,9 +16,7 @@ namespace JobManager.Services
         public async Task AddJob(Job job)
         {
             var service = DependencyService.Get<IWebClientService>();
-
             var jsonString = await service.PostAsync($"{API}/Jobs", JsonConvert.SerializeObject(job), "application/json");
-
             if (jsonString != null)
             {
                 var newJob = JsonConvert.DeserializeObject<Job>(jsonString);
@@ -34,9 +32,7 @@ namespace JobManager.Services
         {
             var service = DependencyService.Get<IWebClientService>();
             var jsonString = await service.GetAsync($"{API}/Jobs/{jobId}");
-
             var job = JsonConvert.DeserializeObject<Job>(jsonString);
-
             return job;
         }
 
@@ -44,9 +40,7 @@ namespace JobManager.Services
         {
             var service = DependencyService.Get<IWebClientService>();
             var jsonString = await service.GetAsync($"{API}/Jobs");
-
             var jobs = JsonConvert.DeserializeObject<List<Job>>(jsonString);
-
             return jobs;
         }
 

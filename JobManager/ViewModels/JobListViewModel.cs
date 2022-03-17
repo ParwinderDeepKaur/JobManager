@@ -29,6 +29,7 @@ namespace JobManager.ViewModels
             LoadJobs();
             RefreshCommand = new AsyncCommand(Refresh);
             SelectCommand = new AsyncCommand<Job>(Selected);
+            AddCommand = new AsyncCommand(Add);
         }
 
         async Task Add()
