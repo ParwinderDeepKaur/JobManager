@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using JobManager.Droid.Services;
 using JobManager.Services;
@@ -26,9 +27,22 @@ namespace JobManager.Droid.Services
             }
         }
 
-        public Task<string> PostAsync(string uri, string body, string type)
+        public async Task<string> PostAsync(string uri, string body, string type)
         {
-            throw new NotImplementedException();
+            try
+            {
+                HttpClient client;
+                client = new HttpClient();
+
+                var content = new StringContent(body.ToString(), Encoding.UTF8, type);
+
+                HttpResponseMessage response = await client.PostAsync(uri, content);
+                return response.IsSuccessStatusCode ? await response.Content.ReadAsStringAsync() : null;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
