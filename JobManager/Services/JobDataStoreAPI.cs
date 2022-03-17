@@ -53,9 +53,7 @@ namespace JobManager.Services
         public async Task UpdateJob(Job job)
         {
             var service = DependencyService.Get<IWebClientService>();
-
             await service.PutAsync($"{API}/Jobs/{job.Id}", JsonConvert.SerializeObject(job), "application/json");
-
         }
     }
 }
