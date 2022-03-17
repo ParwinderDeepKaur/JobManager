@@ -8,5 +8,6 @@ namespace JobManager.Services
     public interface IWebClientService
     {
         Task<string> GetString(string uri);
+        Task GetAsync(string v);
     }
 }

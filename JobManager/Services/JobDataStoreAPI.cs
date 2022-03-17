@@ -10,6 +10,9 @@ namespace JobManager.Services
 {
     class JobDataStoreAPI : IJobDataStore<Job>
     {
+        private static string StudentNumber => "A00237487";
+        private static string API => $"https://jobmanagerdevapi.azurewebsites.net/{StudentNumber}";
+
         public Task AddJob(Job job)
         {
             throw new NotImplementedException();
@@ -23,17 +26,21 @@ namespace JobManager.Services
         public async Task<Job> GetJob(int jobId)
         {
             var service = DependencyService.Get<IWebClientService>();
-            var jsonString = await service.GetString("https://jobmanagerdevapi.azurewebsites.net/A00237487/Jobs/" + jobId);
+            var jsonString = await service.GetAsync($"{API}/Jobs/{jobId}");
+
             var job = JsonConvert.DeserializeObject<Job>(jsonString);
+
             return job;
         }
 
         public async Task<IEnumerable<Job>> GetJobs()
         {
             var service = DependencyService.Get<IWebClientService>();
-            var jsonString = await service.GetString("https://jobmanagerdevapi.azurewebsites.net/A00237487/Jobs");
-            var job = JsonConvert.DeserializeObject<List<Job>>(jsonString);
-            return job;
+            var jsonString = await service.GetAsync($"{API}/Jobs");
+
+            var jobs = JsonConvert.DeserializeObject<List<Job>>(jsonString);
+
+            return jobs;
         }
 
         public Task UpdateJob(Job job)
