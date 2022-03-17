@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using JobManager.Models;
 using MvvmHelpers;
@@ -11,19 +9,21 @@ namespace JobManager.ViewModels
 {
     class JobListViewModel : JobManagerBase
     {
-        public ObservableRangeCollection<Job> Jobs { get; set; }    
-        public AsyncCommand RefreshCommand { get;  }
-        public AsyncCommand<Job> SelectCommand{ get;  }
+        public ObservableRangeCollection<Job> Jobs { get; set; }
+        public AsyncCommand RefreshCommand { get; }
+        public AsyncCommand<Job> SelectCommand { get; }
         public AsyncCommand AddCommand { get; }
 
         private Job selectedJob;
 
-        public Job SelectedJob {
+        public Job SelectedJob
+        {
             get => selectedJob;
             set => SetProperty(ref selectedJob, value);
         }
 
-        public JobListViewModel() {
+        public JobListViewModel()
+        {
             Title = "Jobs";
             Jobs = new ObservableRangeCollection<Job>();
             LoadJobs();
@@ -38,19 +38,22 @@ namespace JobManager.ViewModels
             await Shell.Current.GoToAsync(route);
         }
 
-        public async Task Selected(Job job) {
+        public async Task Selected(Job job)
+        {
             var route = $"{nameof(Views.JobDetailPage)}?JobId={job.Id}";
             await Shell.Current.GoToAsync(route);
         }
 
-        public async Task Refresh() {
+        public async Task Refresh()
+        {
             IsBusy = true;
             Jobs.Clear();
             LoadJobs();
             IsBusy = false;
         }
 
-        public async void LoadJobs() {
+        public async void LoadJobs()
+        {
             IEnumerable<Job> jobs = await JobDataStore.GetJobs();
             Jobs.AddRange(jobs);
         }

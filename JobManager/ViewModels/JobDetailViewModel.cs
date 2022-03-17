@@ -56,7 +56,7 @@ namespace JobManager.ViewModels
                 Description = Description
             };
 
-            await JobDataStore.UpdateJob(job);
+            await JobDataStore.AddJob(job);
 
             await Shell.Current.GoToAsync("..");
         }
