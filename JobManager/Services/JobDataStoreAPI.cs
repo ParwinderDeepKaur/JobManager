@@ -50,9 +50,12 @@ namespace JobManager.Services
             return jobs;
         }
 
-        public Task UpdateJob(Job job)
+        public async Task UpdateJob(Job job)
         {
-            throw new NotImplementedException();
+            var service = DependencyService.Get<IWebClientService>();
+
+            await service.PutAsync($"{API}/Jobs/{job.Id}", JsonConvert.SerializeObject(job), "application/json");
+
         }
     }
 }
