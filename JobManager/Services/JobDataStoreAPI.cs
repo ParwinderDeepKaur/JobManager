@@ -13,9 +13,16 @@ namespace JobManager.Services
         private static string StudentNumber => "A00237487";
         private static string API => $"https://jobmanagerdevapi.azurewebsites.net/{StudentNumber}";
 
-        public Task AddJob(Job job)
+        public async Task AddJob(Job job)
         {
-            throw new NotImplementedException();
+            var service = DependencyService.Get<IWebClientService>();
+
+            var jsonString = await service.PostAsync($"{API}/Jobs", JsonConvert.SerializeObject(job), "application/json");
+
+            if (jsonString != null)
+            {
+                var newJob = JsonConvert.DeserializeObject<Job>(jsonString);
+            }
         }
 
         public Task DeleteJob(Job job)
