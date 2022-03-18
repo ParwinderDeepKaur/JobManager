@@ -56,8 +56,16 @@ namespace JobManager.ViewModels
                 Description = Description
             };
 
-            await JobDataStore.AddJob(job);
-
+            if (jobId == 0)
+            {
+                //to add new job
+                await JobDataStore.AddJob(job);
+            }
+            else 
+            {
+                // to update an existing job
+                await JobDataStore.UpdateJob(job);
+            }
             await Shell.Current.GoToAsync("..");
         }
         public async void LoadJob(int jobId)
