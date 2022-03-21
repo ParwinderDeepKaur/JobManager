@@ -23,9 +23,9 @@ namespace JobManager.Services
             }
         }
 
-        public Task DeleteJob(Job job)
+        public async Task DeleteJob(int jobId)
         {
-            throw new NotImplementedException();
+            
         }
 
         public async Task<Job> GetJob(int jobId)

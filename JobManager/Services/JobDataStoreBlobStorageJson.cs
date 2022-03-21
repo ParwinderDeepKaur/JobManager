@@ -70,7 +70,7 @@ namespace JobManager.Services
             await WriteFile(jobs);
         }
 
-        public async Task DeleteJob(Job job)
+        public async Task DeleteJob(int jobId)
         {
             throw new NotImplementedException();
         }

@@ -12,6 +12,6 @@ namespace JobManager.Services
         Task<Job> GetJob(int id);
         Task AddJob(Job job);
         Task UpdateJob(Job job);
-        Task DeleteJob(Job job);
+        Task DeleteJob(int jobId);
     }
 }
