@@ -19,10 +19,10 @@ namespace JobManager.Services
             }
         }
 
-        public async Task DeleteJob(Job job)
+        public async Task DeleteJob(int jobId)
         {
             var jobs = ReadFile();
-            var remove = jobs.Find(p => p.Id == job.Id);
+            var remove = jobs.Find(p => p.Id == jobId);
             jobs.Remove(remove);
         }
 

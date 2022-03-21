@@ -23,9 +23,11 @@ namespace JobManager.Services
             }
         }
 
-        public Task DeleteJob(Job job)
+        public async Task DeleteJob(int jobId)
         {
-            throw new NotImplementedException();
+            var service = DependencyService.Get<IWebClientService>();
+            var jsonString = await service.DeleteAsync($"{API}/Jobs/{jobId}");
+            var job = JsonConvert.DeserializeObject<Job>(jsonString);
         }
 
         public async Task<Job> GetJob(int jobId)

@@ -9,7 +9,19 @@ namespace JobManager.ViewModels
 {
     class JobListViewModel : JobManagerBase
     {
-        public ObservableRangeCollection<Job> Jobs { get; set; }
+        private ObservableRangeCollection<Job> _Jobs;
+        public ObservableRangeCollection<Job> Jobs
+        {
+            get
+            {
+                return _Jobs;
+            }
+            set
+            {
+                _Jobs = value;
+                base.OnPropertyChanged();
+            }
+        }
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand<Job> SelectCommand { get; }
         public AsyncCommand AddCommand { get; }
@@ -55,6 +67,7 @@ namespace JobManager.ViewModels
         public async void LoadJobs()
         {
             IEnumerable<Job> jobs = await JobDataStore.GetJobs();
+            Jobs = new ObservableRangeCollection<Job>();
             Jobs.AddRange(jobs);
         }
     }
