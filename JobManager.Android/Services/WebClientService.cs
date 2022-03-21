@@ -62,21 +62,5 @@ namespace JobManager.Droid.Services
                 return null;
             }
         }
-
-        public async Task<string> DeleteAsync(string uri)
-        {
-            try
-            {
-                HttpClient client;
-                client = new HttpClient();
-
-                HttpResponseMessage response = await client.DeleteAsync(uri);
-                return response.IsSuccessStatusCode ? await response.Content.ReadAsStringAsync() : null;
-            }
-            catch
-            {
-                return null;
-            }
-        }
     }
 }

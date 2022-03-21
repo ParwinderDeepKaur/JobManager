@@ -25,9 +25,7 @@ namespace JobManager.Services
 
         public async Task DeleteJob(int jobId)
         {
-            var service = DependencyService.Get<IWebClientService>();
-            var jsonString = await service.DeleteAsync($"{API}/Jobs/{jobId}");
-            var job = JsonConvert.DeserializeObject<Job>(jsonString);
+            
         }
 
         public async Task<Job> GetJob(int jobId)
