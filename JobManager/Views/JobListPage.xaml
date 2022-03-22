@@ -48,6 +48,7 @@
                                 <ViewCell>
                                     <StackLayout>
                                         <Label Text="{Binding Name}" TextColor="Black"></Label>
+                                        <Button Text="Delete" Clicked="deleteRecord" TextColor="Black"></Button>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
