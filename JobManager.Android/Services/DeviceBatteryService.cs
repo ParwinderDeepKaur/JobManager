@@ -17,15 +17,54 @@ namespace JobManager.Droid.Services
     {
         public DeviceBattery GetBattery()
         {
-            var level = Battery.ChargeLevel;
-            var state = Battery.State;
-            var source = Battery.PowerSource;
+            double level = Battery.ChargeLevel;
+            string state = "", source = "";
+
+            switch (Battery.State)
+            {
+                case BatteryState.Charging:
+                    state = "Charging";
+                    break;
+                case BatteryState.Full:
+                    state = "Full";
+                    break;
+                case BatteryState.Discharging:
+                case BatteryState.NotCharging:
+                    state = "Not Charging";
+                    break;
+                case BatteryState.NotPresent:
+                    state = "Not Present";
+                    break;
+                case BatteryState.Unknown:
+                    state = "Unknown";
+                    break;
+            }
+
+
+            switch (Battery.PowerSource)
+            {
+                case BatteryPowerSource.Battery:
+                    source = "Battery";
+                    break;
+                case BatteryPowerSource.AC:
+                    source = "AC";
+                    break;
+                case BatteryPowerSource.Usb:
+                    source = "USB";
+                    break;
+                case BatteryPowerSource.Wireless:
+                    source = "Wireless";
+                    break;
+                case BatteryPowerSource.Unknown:
+                    source = "Unknown";
+                    break;
+            }
+
             DeviceBattery batteryObj = new DeviceBattery();
             batteryObj.Level = level;
-            batteryObj.State = (DeviceBattery.States)state;
-            batteryObj.Source = (DeviceBattery.Sources)source;
-            Console.WriteLine("Battery : " + level+" "+state+" "+source);
-
+            batteryObj.State = state;
+            batteryObj.Source = source;
+            Console.WriteLine("Battery : " + level + " " + state + " " + source);
             return batteryObj;
         }
     }

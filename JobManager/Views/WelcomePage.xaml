@@ -23,9 +23,6 @@
             <Label Text="State: " FontSize="Medium" />
             <Label Text="{Binding State}" FontSize="Large" />
 
-            <!-- <Button Text="Get battery level" Command="{Binding GetBatteryStatusCommand}" /> -->
-
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

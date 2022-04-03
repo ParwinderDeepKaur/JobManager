@@ -9,7 +9,6 @@ namespace JobManager.ViewModels
 {
     class WelcomeViewModel :JobManagerBase
     {
-        public AsyncCommand GetBatteryStatusCommand { get; }
 
         private  double level;
 
@@ -36,19 +35,16 @@ namespace JobManager.ViewModels
     public WelcomeViewModel() 
         {
             Title = "Welcome";
-            //GetBatteryStatusCommand = new AsyncCommand(GetBatteryStatus);
             GetBatteryStatus();
         }
 
-        async Task GetBatteryStatus()
+        void GetBatteryStatus()
         {
             var service = DependencyService.Get<IDeviceBatteryService>();
             var deviceBattery = service.GetBattery();
             Level = deviceBattery.Level;
-            Source = deviceBattery.Source.ToString();
-            State= deviceBattery.State.ToString();
-
-
+            Source = deviceBattery.Source;
+            State = deviceBattery.State;
         }
     }
 }
