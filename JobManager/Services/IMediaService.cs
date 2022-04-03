@@ -9,6 +9,7 @@ namespace JobManager.Services
 {
     public interface IMediaService
     {
-        Task<Image> CapturePhotoAsync();
+        Task<byte[]> CapturePhotoAsync(); //Opens the camera to take a photo.
+
     }
 }

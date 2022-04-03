@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using JobManager.Models;
@@ -74,7 +75,7 @@ namespace JobManager.ViewModels
                 //to add new job
                 await JobDataStore.AddJob(job);
             }
-            else 
+            else
             {
                 // to update an existing job
                 await JobDataStore.UpdateJob(job);
@@ -85,8 +86,8 @@ namespace JobManager.ViewModels
         async Task CapturePhoto()
         {
             var service = DependencyService.Get<IMediaService>();
-            Image image = await service.CapturePhotoAsync();
-            Picture = image.Source;
+            var bytes = await service.CapturePhotoAsync();
+            Picture = ImageSource.FromStream(() => new MemoryStream(bytes));
         }
 
         public async void LoadJob(int jobId)

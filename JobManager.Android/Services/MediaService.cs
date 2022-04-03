@@ -27,29 +27,23 @@ namespace JobManager.Droid.Services
 {
     public class MediaService : IMediaService
     {
-        public async Task<Image> CapturePhotoAsync()
+        public async Task<byte[]> CapturePhotoAsync()
         {
             try
             {
                 FileResult result = await MediaPicker.CapturePhotoAsync();
-                //await LoadPhotoAsync(result);
 
                 Stream stream = await result.OpenReadAsync();
 
-                Image image = new Image
-                {
-                    Source = ImageSource.FromStream(() => stream)
-                };
-
-                return image;
+                MemoryStream memoryStream = new MemoryStream();
+                stream.CopyTo(memoryStream);
+                return memoryStream.ToArray();
             }
             catch (FeatureNotSupportedException ex)
             {
-                // Feature is not supported on the device
             }
             catch (PermissionException ex)
             {
-                // Permissions not granted
             }
             catch (Exception ex)
             {
