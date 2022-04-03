@@ -29,7 +29,7 @@ namespace JobManager.Views
             _viewModel.Refresh();
         }
         /// <summary>
-        /// 
+        /// delete selected job from list
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

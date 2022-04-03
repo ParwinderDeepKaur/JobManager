@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using JobManager.Models;
+using JobManager.Services;
 using MvvmHelpers.Commands;
 using Xamarin.Forms;
 
@@ -13,6 +14,7 @@ namespace JobManager.ViewModels
     public class JobDetailViewModel : JobManagerBase
     {
         public AsyncCommand SaveCommand { get; }
+        public AsyncCommand TakePicture { get; }
 
         private int jobId;
         public int JobId
@@ -42,9 +44,20 @@ namespace JobManager.ViewModels
             set => SetProperty(ref description, value);
         }
 
+
+        private ImageSource picture;
+        public ImageSource Picture
+        {
+            get => picture;
+            set => SetProperty(ref picture, value);
+        }
+
+
         public JobDetailViewModel()
         {
             SaveCommand = new AsyncCommand(Save);
+            TakePicture = new AsyncCommand(CapturePhoto);
+
         }
 
         async Task Save()
@@ -68,6 +81,14 @@ namespace JobManager.ViewModels
             }
             await Shell.Current.GoToAsync("..");
         }
+
+        async Task CapturePhoto()
+        {
+            var service = DependencyService.Get<IMediaService>();
+            Image image = await service.CapturePhotoAsync();
+            Picture = image.Source;
+        }
+
         public async void LoadJob(int jobId)
         {
             try
