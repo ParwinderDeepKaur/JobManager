@@ -1,12 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:JobManager.ViewModels"
              x:Class="JobManager.Views.WelcomePage">
+    
+    <ContentPage.BindingContext>
+        <viewmodels:WelcomeViewModel />
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to JobManager!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="Level: " FontSize="Medium" />
+            <Label Text="{Binding Level}" FontSize="Large" />
+            
+            <Label Text="Source: " FontSize="Medium" />
+            <Label Text="{Binding Source}" FontSize="Large" />
+            
+            <Label Text="State: " FontSize="Medium" />
+            <Label Text="{Binding State}" FontSize="Large" />
+
+            <!-- <Button Text="Get battery level" Command="{Binding GetBatteryStatusCommand}" /> -->
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

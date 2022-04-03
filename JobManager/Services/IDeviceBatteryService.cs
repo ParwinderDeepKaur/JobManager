@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Xamarin.Forms;
+﻿using System.Threading.Tasks;
+using JobManager.Models;
 
 namespace JobManager.Services
 {
-    public class IDeviceBatteryService : ContentPage
+    public interface IDeviceBatteryService
     {
-        public IDeviceBatteryService()
-        {
-            Content = new StackLayout
-            {
-                Children = {
-                    new Label { Text = "Welcome to Xamarin.Forms!" }
-                }
-            };
-        }
+        DeviceBattery GetBattery();
     }
 }

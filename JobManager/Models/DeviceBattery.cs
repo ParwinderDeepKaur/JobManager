@@ -7,16 +7,29 @@ using Xamarin.Forms;
 
 namespace JobManager.Models
 {
-    public class DeviceBattery : ContentPage
+    public class DeviceBattery 
     {
-        public DeviceBattery()
+        public double Level { get; set; }
+        public States State { get; set;}
+        public Sources Source { get; set;}
+
+        public enum States
         {
-            Content = new StackLayout
-            {
-                Children = {
-                    new Label { Text = "Welcome to Xamarin.Forms!" }
-                }
-            };
+            Charging,
+            Full,
+            Discharging,
+            NotCharging,
+            NotPresent,
+            Unkown
+        }
+
+        public enum Sources
+        {
+            Battery,
+            AC,
+            USB,
+            Wireless,
+            Unknown
         }
     }
 }
