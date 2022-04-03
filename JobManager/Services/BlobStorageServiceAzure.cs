@@ -1,30 +1,33 @@
-﻿using System;
+﻿using Azure.Storage.Blobs;
+using JobManager.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Azure.Storage.Blobs;
-using Xamarin.Forms;
 
 namespace JobManager.Services
 {
-    public class BlobStorageServiceAzure : IBlobStorageService
+    class BlobStorageServiceAzure : IBlobStorageService
     {
         private readonly BlobServiceClient service = new BlobServiceClient(ConnectionString);
+
         private static string ConnectionString => "DefaultEndpointsProtocol=https;AccountName=isp1004example;AccountKey=m2fGXOU8vUMOr/hCp7YGfBFcwyb1vYZKXLXO0GrsDyuMnZkOyYsSgJCUA/D5XgpTKcyAjHTxuTl5+AStkc5gVQ==;EndpointSuffix=core.windows.net";
         private static string Container => "a00237487";
 
         public async Task<MemoryStream> DownloadStreamAsync(string name)
         {
             BlobClient blob = service.GetBlobContainerClient(Container).GetBlobClient(name);
+
             if (blob.Exists())
             {
                 var stream = new MemoryStream();
                 await blob.DownloadToAsync(stream);
+
                 stream.Position = 0;
                 return stream;
             }
+
             return null;
         }
 
@@ -41,7 +44,6 @@ namespace JobManager.Services
             {
                 return false;
             }
-            
         }
     }
 }

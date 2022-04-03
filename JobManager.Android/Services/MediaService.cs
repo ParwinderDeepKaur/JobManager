@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Android.App;
 using JobManager.Droid.Services;
@@ -39,10 +36,10 @@ namespace JobManager.Droid.Services
                 stream.CopyTo(memoryStream);
                 return memoryStream.ToArray();
             }
-            catch (FeatureNotSupportedException ex)
+            catch (FeatureNotSupportedException)
             {
             }
-            catch (PermissionException ex)
+            catch (PermissionException)
             {
             }
             catch (Exception ex)

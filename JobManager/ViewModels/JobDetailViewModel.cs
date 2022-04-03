@@ -88,6 +88,9 @@ namespace JobManager.ViewModels
             var service = DependencyService.Get<IMediaService>();
             var bytes = await service.CapturePhotoAsync();
             Picture = ImageSource.FromStream(() => new MemoryStream(bytes));
+
+            //var blob = DependencyService.Get<IBlobStorageService>();
+            //await blob.UploadStreamAsync($"Jobs/Pictures/{JobId}/{Guid.NewGuid()}.png", new MemoryStream(bytes));
         }
 
         public async void LoadJob(int jobId)
